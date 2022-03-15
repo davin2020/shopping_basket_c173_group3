@@ -10,5 +10,10 @@ public interface ProductService {
 	List<Product> getAllProducts();
 	Product insertProduct(Product product);
 	Product deleteProduct(int id);
+	
+	List <Product> getProductByTypeId(int typeId);
+	
+	Type getTypeById(int typeId);
+	List<Type> getAllTypes();
 
 }

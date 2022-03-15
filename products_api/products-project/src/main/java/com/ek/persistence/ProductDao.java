@@ -14,5 +14,9 @@ import com.ek.entity.Product;
 
 @Repository
 public interface ProductDao extends JpaRepository<Product, Integer> {
+	List <Product> findAll();
+	
+	@Query("from Product where typeId=:tId")
+	public List <Product> getProdByTypeId(@Param("tId") int typeId);
 
 }

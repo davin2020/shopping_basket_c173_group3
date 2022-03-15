@@ -16,6 +16,9 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductDao productDao;
 	
+	@Autowired
+	private TypeDao typeDao;
+	
 	@Override
 	public Product getProductById(int id) {
 		return productDao.getById(id);
@@ -37,5 +40,20 @@ public class ProductServiceImpl implements ProductService {
 		productDao.deleteById(id);
 		return product;
 	}
-
+	
+	@Override 
+	public List <Product> getProductByTypeId(int typeId) {
+		return productDao.getProdByTypeId(typeId);
+	}
+	
+	@Override
+	public Type getTypeById(int typeId) {
+		return typeDao.getById(typeId);
+	}
+	
+	@Override
+	public List<Type> getAllTypes() {
+		return typeDao.findAll();
+	}
+	
 }
