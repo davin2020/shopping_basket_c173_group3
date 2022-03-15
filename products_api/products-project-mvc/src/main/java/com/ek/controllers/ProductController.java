@@ -31,17 +31,54 @@ public class ProductController {
 		return "index";
 	}
 	
-	@RequestMapping("/searchProductPage")
-	public String getSearchProductPage() {
-		return "searchProdPage";
-	}
+//	@RequestMapping("/searchProductPage")
+//	public String getSearchProductPage() {
+//		return "searchProdPage";
+//	}
 	
+	// this search page will contain a dynamic list of Type links to show the relevant products
+	@RequestMapping("/searchProductPage")
+	public ModelAndView getSearchProductPage() {
+		ModelAndView modelAndView = new ModelAndView();
+		
+		List <Type> mytypes = productService.getAllTypes();
+//		for (Type item : mytypes) {
+//		    System.out.println(item.toString());
+//		}
+		//changes to types and test if still works on searchProductPage.html
+		modelAndView.addObject("mytypes", mytypes);
+		modelAndView.setViewName("searchProductPage");
+
+		return modelAndView;
+	}
+		
 	@RequestMapping("/searchProduct")
 	public ModelAndView searchProductController(@RequestParam("prodId") int id) {
 		ModelAndView modelAndView=new ModelAndView();
 		Product product=productService.getProductById(id);
 		modelAndView.addObject("product", product);
+		
+		//ProductDetails contains Type Info (TaxAmount, TypeId and TypeName) and Product Info
+		ProductDetails prodDetails = productService.getProductDetailsById(id);
+		modelAndView.addObject("productDetails", prodDetails);
+		
 		modelAndView.setViewName("showProduct");
+		return modelAndView;
+	}
+	
+	// new method to return multiple products that match a given type id
+	@RequestMapping("/searchProductType")
+	public ModelAndView searchProductTypeController(@RequestParam("typeId") int typeId) {
+		ModelAndView modelAndView = new ModelAndView();
+		ProductList myProdList  = productService.getProductDetailsByTypeId(typeId);
+		//must turn ProductList into List <Product> so that thymeleaf can iterate over it ok, otherwise generates error 
+		List <Product> listOfProds = myProdList.getProdList();
+//		for (Product item : listOfProds) {
+//		    System.out.println(item.toString());
+//		}
+		
+		modelAndView.addObject("products", listOfProds);
+		modelAndView.setViewName("showAllProducts");
 		return modelAndView;
 	}
 	

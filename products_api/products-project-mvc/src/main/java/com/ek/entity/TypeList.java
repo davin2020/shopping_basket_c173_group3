@@ -7,14 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import com.ek.entity.*;
-
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductList {
-	
+public class TypeList {
 	@Setter
 	@Getter
-	List <Product> prodList;
-
+	List <Type> typeList;
 }
