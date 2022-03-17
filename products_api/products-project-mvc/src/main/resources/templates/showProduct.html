@@ -3,13 +3,14 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Products | Show single Product</title>
+<link rel="stylesheet" href="style_flatcart.css">
 </head>
 
 <body>
 <h1>Single Product Details</h1>
 
 <table border="1">
-	<tr>
+	<tr class=" thprod">
 		<th>Product ID</th>
 		<th>Product Name</th>
 		<th>Product Price</th>
@@ -22,16 +23,128 @@
 	<tr>
 		<td th:text="${product.prodId}"></td>
 		<td th:text="${product.prodName}"></td>
+		<td th:text="${product.description}"></td>
 		<td th:text="${product.price}"></td>
 		<td th:text="${product.quantityAvailable}"></td>
-		<!--  this should fetch/return an obj rather than an id, will it error if no productDetails? -->
-		<td th:text="${product.description}"></td>
+		<!--  this should fetch/return an obj rather than an id, will it error if no productDetails? -->	
 		<td th:text="${product.typeId}"></td>
 		<td th:text="${productDetails.getType().typeName}"></td>
 		<td th:text="${productDetails.getType().taxPercentage}"></td>
 	</tr>
 </table>
 <br><br>
+
+<div class="container">
+  <div class="heading">
+    <h1>
+      <span class="shopper">XYZ Retail - Product Details</span> 
+    </h1>   
+    <a href="#" class="visibility-cart transition is-open">X</a>    
+  </div>
+  
+  <div class="cart transition is-open">
+ 
+    <div class="table">
+      
+      <div class="layout-inline row thprod">
+      	<!--<div class="col">ID</div>-->
+        <div class="col ">Product</div>
+        <div class="col ">Description</div>
+        <div class="col col-price align-center ">Price</div>
+        <div class="col col-qty align-center">Quantity Available</div>
+        <!--<div class="col">Type ID</div>-->
+        <div class="col">Type Name</div>
+        <div class="col">Tax Percentage</div>
+      </div>
+      
+      <div class="layout-inline row">
+        <!-- Product ID -->
+        <!-- Product -->
+        <!-- Description -->
+        <!-- Price -->
+        <!-- Quantity Available -->
+        <!-- Type ID -->
+        <!-- Type Name -->
+        <!-- Tax Percentage -->
+         
+        <!-- Product ID 
+        <div class="col col-pro layout-inline">
+          <p th:text="${product.prodId}"></p>
+        </div>
+        -->
+        
+        <!-- Product -->
+        <div class="col layout-inline">
+          <p th:text="${product.prodName}"></p>
+        </div>
+        
+        <!-- Description -->
+        <div class="col layout-inline">
+          <p th:text="${product.description}"></p>
+        </div>
+        
+        <!-- Price -->
+        <div class="col col-price col-numeric align-center ">
+        	<p th:text="${product.price}"> </p> 
+        </div>
+        
+		<!-- Quantity Available -->
+        <div class="col col-qty layout-inline">
+          	<p th:text="${product.quantityAvailable}"> </p> 
+        
+        </div>
+        
+        <!-- Type ID
+        <div class="col layout-inline">
+          <p th:text="${product.typeId}"></p>
+        </div>
+        -->
+        
+        <!-- Type Name -->
+        <div class="col layout-inline">
+          <p th:text="${productDetails.getType().typeName}"></p>
+        </div>
+        
+        <!-- Tax Percentage --> 
+        <div class="col col-tax col-numeric">
+        <p th:text="${productDetails.getType().taxPercentage}"></p>
+        </div>
+        <!--
+        <div class="col col-total col-numeric"> <p> £182.95</p>
+        </div>
+        -->
+      </div>
+
+		<!-- Total Orders  -->
+		<!--
+       <div class="tf">
+         <div class="row layout-inline">
+           <div class="col">
+             <p>VAT</p>
+           </div>
+           <div class="col"></div>
+         </div>
+         <div class="row layout-inline">
+           <div class="col">
+             <p>Shipping</p>
+           </div>
+           <div class="col"></div>
+         </div>
+          <div class="row layout-inline">
+           <div class="col">
+             <p>Total</p>
+           </div>
+           <div class="col"></div>
+         </div>
+       </div>         
+       -->
+  </div>
+    
+    <a href="#" class="btn btn-update">Update cart</a>
+  
+</div>
+  </div>
+  
 <a href="./">Go To Main Page</a>
 
 </body>
