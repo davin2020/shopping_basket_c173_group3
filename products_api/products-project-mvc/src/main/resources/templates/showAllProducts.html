@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>All Products</title>
+</head>
+<body>
+<h1>Product System</h1>
+<h1>Product Details</h1>
+<table border="1">
+	<tr>
+		<th>Product ID</th>
+		<th>Product Name</th>
+		<th>Product Price</th>
+		<th>Quantity Available</th>
+		<th>Description</th>
+		<th>Type Id</th>
+		<!-- 
+		<th>Type Name</th>
+		<th>Tax Amount</th>
+		-->
+	</tr>
+		<tr th:each="product : ${products}">
+		<td th:text="${product.prodId}"></td>
+		<td th:text="${product.prodName}"></td>
+		<td th:text="${product.price}"></td>
+		<td th:text="${product.quantityAvailable}"></td>
+		<td th:text="${product.description}"></td>
+		<td th:text="${product.typeId}"></td>
+		<!-- TODO could add Type info as part of Product, using ProductDetails class - would require new Controller function similar to searchProductController and probably new route in API project
+		<td th:text="${productDetails.typeName}"></td>
+		<td th:text="${productDetails.taxPercentage}"></td>
+		-->
+	</tr>
+</table>
+<br><br>
+<a href="./menu">Go To Main Page</a>
+</body>
+</html>
