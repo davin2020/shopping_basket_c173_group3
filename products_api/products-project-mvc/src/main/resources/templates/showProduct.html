@@ -17,14 +17,13 @@
 		<th>Description</th>
 		<th>Type Id</th>
 		<th>Type Name</th>
-		<th>Sales Tax Percentage</th>
+		<th>Tax Amount</th>
 	</tr>
 	<tr>
 		<td th:text="${product.prodId}"></td>
 		<td th:text="${product.prodName}"></td>
 		<td th:text="${product.price}"></td>
 		<td th:text="${product.quantityAvailable}"></td>
-		<!--  this should fetch/return an obj rather than an id, will it error if no productDetails? -->
 		<td th:text="${product.description}"></td>
 		<td th:text="${product.typeId}"></td>
 		<td th:text="${productDetails.getType().typeName}"></td>

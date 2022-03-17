@@ -56,12 +56,10 @@ public class ProductServiceImpl implements ProductService {
 		int typeId = prod.getTypeId();
 		Type type = restTemplate.getForObject("http://localhost:8085/types/" + typeId, Type.class);
 		ProductDetails prodDetails = new ProductDetails(prod, type);
-		// how to add type info to product? eg in new object ProductDetails or ?
 		return prodDetails;
 	}
 
-	// this Returns Products by matching Type Id - but should it return Product
-	// or ProductDetails?
+	// this Returns Products by matching Type Id - but should it return ProductDetails?
 	@Override
 	public ProductList getProductDetailsByTypeId(int typeId) {
 		ProductList prodList = restTemplate.getForObject("http://localhost:8085/products/type/" + typeId, ProductList.class);

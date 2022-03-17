@@ -1,5 +1,6 @@
 package com.ek.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -66,18 +67,25 @@ public class ProductController {
 		return modelAndView;
 	}
 	
-	// new method to return multiple products that match a given type id
+	// new method to return multiple products that match a given type id, provides list of Product Details which includes Tax
 	@RequestMapping("/searchProductType")
 	public ModelAndView searchProductTypeController(@RequestParam("typeId") int typeId) {
 		ModelAndView modelAndView = new ModelAndView();
 		ProductList myProdList  = productService.getProductDetailsByTypeId(typeId);
 		//must turn ProductList into List <Product> so that thymeleaf can iterate over it ok, otherwise generates error 
 		List <Product> listOfProds = myProdList.getProdList();
-//		for (Product item : listOfProds) {
-//		    System.out.println(item.toString());
-//		}
-		
 		modelAndView.addObject("products", listOfProds);
+		
+		//make ProdDetails list so it includes Prod and Type which has Tax amount
+	    List <ProductDetails> prodDetailsList = new ArrayList <ProductDetails>();
+		for (Product item : listOfProds) {
+		    //System.out.println(item.toString());
+		    ProductDetails tempProdDetails = productService.getProductDetailsById(item.getProdId());
+		    //System.out.println("Temp Prod Details " + tempProdDetails.toString());
+		    prodDetailsList.add(tempProdDetails);
+		}
+		modelAndView.addObject("productsDetails", prodDetailsList);
+
 		modelAndView.setViewName("showAllProducts");
 		return modelAndView;
 	}
@@ -114,8 +122,19 @@ public class ProductController {
 		
 		List<Product> products = productService.getAllProducts();
 		modelAndView.addObject("products", products);  //request scope
-		modelAndView.setViewName("showAllProducts");
 		
+		//FYI this is not the best way of getting the ProductDetails but the HQL getProductDetailsByTypeId() in productDao is not working as expected, so this is a workaround
+		//ProductDetails contains Type Info (TaxAmount, TypeId and TypeName) and Product Info
+		List<ProductDetails> prodDetailsList = new ArrayList<ProductDetails>();
+		for (Product item : products) {
+		    //System.out.println(item.toString());
+		    ProductDetails tempProdDetails = productService.getProductDetailsById(item.getProdId());
+		    //System.out.println("Temp prod details list " + tempProdDetails.toString());
+		    prodDetailsList.add(tempProdDetails);
+		}
+		modelAndView.addObject("productsDetails", prodDetailsList);
+				
+		modelAndView.setViewName("showAllProducts");
 		return modelAndView;
 	}
 	
