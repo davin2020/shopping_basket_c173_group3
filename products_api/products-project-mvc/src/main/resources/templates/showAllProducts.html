@@ -3,34 +3,75 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>All Products</title>
+<!--  <link rel="stylesheet" href="style_flatcart.css"> -->
+<link rel="stylesheet" href="simplestyle.css">
+
+<script type="text/javascript" src="cart_shake.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-<h1>Product System</h1>
-<h1>Product Details</h1>
-	<table border="1">
-		<tr>
-			<th>Product ID</th>
-			<th>Product Name</th>
-			<th>Product Price</th>
-			<th>Quantity Available</th>
-			<th>Description</th>
-			<th>Type Id</th>	
-			<th>Type Name</th>
-			<th>Tax Amount</th>
-		</tr>
-		<tr th:each="product : ${productsDetails}">
-			<td th:text="${product.getProd().prodId}"></td>
-			<td th:text="${product.getProd().prodName}"></td>
-			<td th:text="${product.getProd().price}"></td>
-			<td th:text="${product.getProd().quantityAvailable}"></td>
-			<td th:text="${product.getProd().description}"></td>
-			<td th:text="${product.getProd().typeId}"></td>
-			<td th:text="${product.getType().typeName}"></td>
-			<td th:text="${product.getType().taxPercentage}"></td>
-		</tr>
-	</table>
+<div class="container">
+	<h1 class="xyz-company-name">XYZ Retail System</h1>
+	<img class='shopping-cart' id="cart-icon" src='https://d30y9cdsu7xlg0.cloudfront.net/png/28468-200.png' onclick=''>
+</div>
+<br>
+
+<div class="container">
+<h2 class="xyz-page-name">Search</h2>
+<div class="flex-search-parent">
+<!-- show a dynamic list of links, to display products from each Type in the DB - could style as buttons with CSS? -->
+	<div class="flex-search-child" th:each="type : ${mytypes}">
+		<div class="btn-view-details">
+			<a th:href="@{./searchProductType(typeId=${type.typeId})}">Show All <span th:text="${type.typeName}"></span> </a>
+		</div>
+	</div>
+</div>
+</div>
+	
+<br>
+
+<div class="container">
+<h2 class="xyz-page-name">All Products</h2>
+
+	<div class="table-container">
+		<table style="margin: 0 auto;">
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Price</th>
+				<th>Quantity Available</th>
+				<th>Type</th>
+				<th>Tax Amount</th>
+				<th>Add</th>
+				<!-- 
+				<th>Type Name</th>
+				<th>Tax Amount</th>
+				-->
+			</tr>
+				<tr th:each="product : ${productsDetails}">
+				<!--<td th:text="${product.prodId}"></td>-->
+				<td class="btn-view-link"><a th:href="@{/searchProduct(prodId=${product.getProd().prodId})}">
+					<span th:text="${product.getProd().prodName}"></span></a>
+				</td>
+				<td th:text="${product.getProd().description}"></td>
+				<td th:text="${product.getProd().price}"></td>
+				<td th:text="${product.getProd().quantityAvailable}"></td>
+				<td th:text="${product.getType().typeName}"></td>
+				<td th:text="${product.getType().taxPercentage}"></td>
+				<td ><a href="#" class="btn-add" onclick='addToCartShake()'>Add</a></td>
+			</tr>
+		</table>
+	</div>
+</div>
+
 <br><br>
-<a href="./menu">Go To Main Page</a>
+<footer>
+	<h4 class="xyz-footer-text">
+	<a href="./menu">Home </a> | 
+	<a href="./xxx">My Account</a>
+	</h4>
+</footer>
+
 </body>
 </html>

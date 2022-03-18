@@ -32,11 +32,6 @@ public class ProductController {
 		return "index";
 	}
 	
-//	@RequestMapping("/searchProductPage")
-//	public String getSearchProductPage() {
-//		return "searchProdPage";
-//	}
-	
 	// this search page will contain a dynamic list of Type links to show the relevant products
 	@RequestMapping("/searchProductPage")
 	public ModelAndView getSearchProductPage() {
@@ -86,6 +81,10 @@ public class ProductController {
 		}
 		modelAndView.addObject("productsDetails", prodDetailsList);
 
+		// get all the types for the Search by Type features
+		List <Type> mytypes = productService.getAllTypes();
+		modelAndView.addObject("mytypes", mytypes);
+		
 		modelAndView.setViewName("showAllProducts");
 		return modelAndView;
 	}
@@ -134,6 +133,13 @@ public class ProductController {
 		}
 		modelAndView.addObject("productsDetails", prodDetailsList);
 				
+		List <Type> mytypes = productService.getAllTypes();
+//		for (Type item : mytypes) {
+//		    System.out.println(item.toString());
+//		}
+		//changes to types and test if still works on searchProductPage.html
+		modelAndView.addObject("mytypes", mytypes);
+		
 		modelAndView.setViewName("showAllProducts");
 		return modelAndView;
 	}
