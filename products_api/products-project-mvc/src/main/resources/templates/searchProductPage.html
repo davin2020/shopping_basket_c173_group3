@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Products | Search</title>
+<link rel="stylesheet" href="simplestyle.css">
+
+<script type="text/javascript" src="cart_shake.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+<h1>Search by Type or Product</h1>
+
+	<h2>Search By Type - SEARCH</h2>
+	<!-- show a dynamic list of links, to display products from each Type in the DB - could style as buttons with CSS? -->
+	<div th:each="type : ${mytypes}">
+		<div class="btn-view-details">
+			<a th:href="@{./searchProductType(typeId=${type.typeId})}">Show All <span th:text="${type.typeName}"></span> </a>
+		</div>
+	</div>
+	
+	<br><br>
+	<form action="./searchProduct" method="post">
+		Enter Product ID : <input type="text" name="prodId"><br><br>
+		<input type="submit" value="Search">
+		<br><br>
+	</form>
+
+	<form action="./searchProductType" method="post">
+		Enter Product Type ID: <input type="text" name="typeId"><br><br>
+		<input type="submit" value="Search">
+	</form>
+
+<br><br>
+<a href="./">Go To Main Page</a>
+
+</body>
+</html>

@@ -1,0 +1,231 @@
+@charset "ISO-8859-1";
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+body {
+  background: #e3e7e8;
+  font: 90%/1.4em "Trebuchet Ms", helvetica;
+}
+
+p {
+  font-size: 1.8em;
+  color: #8a8a8a;
+}
+
+
+/* ==================  Table fo Products ======  */
+
+.table-container {
+	position: relative;
+	align-items: center;
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+    align-content: center;
+}
+
+.table {
+	position: relative;
+	margin: 0 auto;
+	width: 95%;
+  	background: #ffffff;
+  	border-radius: 0.6em;
+  	overflow: hidden;
+  	clear: both;
+  	margin-bottom: 1.8em;
+  	text-align: center;
+  	border-collapse: collapse;
+  	border: white 2px solid;
+  	border-bottom: white 2px solid;
+}
+
+th {
+  background: #10ad99 ;
+  color: #fff;
+ /* text-transform: uppercase; */
+  font-weight: bold;
+  font-size: 1.1em;
+  padding: 0.5em;
+  
+}
+
+.thprod {
+  background: #10ad99 ;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1em;
+   padding: 0.5em;
+}
+
+
+/* ==================  Shopping Cart icon and shaking animation ======  */
+
+.shake {
+  animation: shake 0.7s;
+}
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0px);
+  }
+  20%,
+  80% {
+    transform: translateX(-3px) rotate(-7deg);
+  }
+  40%,
+  60% {
+    transform: translateX(3px) rotate(7deg);
+  }
+  50% {
+    transform: translateX(0px);
+  }
+}
+
+.shopping-cart{
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 25px;
+  right: 30px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* ================== Add to cart button  ===  */
+.btn-add {
+  padding: 10px 30px;
+  border-radius: 0.3em;
+  font-size: 1.4em;
+  font-weight: bold;
+  background: #43ace3;
+  color: #fff;
+  /* need float so table cell doenst ignore buttons presence  */
+  float: right;
+  margin: 7px;
+}
+
+.btn-add:hover {
+  box-shadow: 0 6px 0 rgba(59,154,198, 1);
+}
+
+.btn-add a {
+	text-decoration: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+a .btn-add {
+	text-decoration: none;
+}
+
+.btn-view-details a {
+	text-decoration: none;
+}
+
+.btn-view-details {
+  padding: 10px 20px;
+  border-radius: 0.3em;
+  font-size: 1.1em;
+  font-weight: bold;
+  background: #10ad99;
+  color: #fff;
+  /* need float so table cell doenst ignore buttons presence  */
+
+  margin: 10px;
+  margin-bottom: 20px
+}
+
+.btn-view-link {
+  font-size: 1.5em;
+  color: #10ad99;
+  /* need float so table cell doenst ignore buttons presence    float: right; */
+  padding: 10px;
+}
+
+.btn-view-link:hover {
+	font-weight: bold;
+}
+	
+.btn-view-details:hover {
+	/* swop bkg and text color for Prod Name?
+	padding: 10px 20px;
+	background: #fff;
+	color: #10ad99;
+	margin: 10px;
+	43 153 139 dadrk teal 
+	 */
+	box-shadow: 0 6px 0 rgba(43,153,139, 1);
+}
+
+.flex-search-parent {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-content: space-around;
+	width: 100%;	
+}
+
+.flex-search-child {
+	position: relative;
+	/*padding: 20px;*/ /* pad within item */
+	flex: 1 1 30px;
+	text-align: center;
+	/* need this to flex & center items, so that tech icons stay at bottom */
+	display: flex;
+	flex-direction: row;
+	align-items: center; /* need this as some pics in flex are not being centered properly */
+}
+
+/* ================== headers and footers ===  */
+
+.container {
+	position: relative;
+	width: 100%
+}
+.xyz-company-name {
+  padding: 1em;
+  position: relative;
+  z-index: 1;
+  color: #f7f7f7;
+  background: #3c9bcd;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 2.5em;
+  text-align: center;
+  width: 100%;
+}
+
+.xyz-page-name {
+  position: relative;
+  z-index: 1;
+  color: #3c9bcd;
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center;
+}
+
+.xyz-footer-text {
+  padding: 1em;
+  position: relative;
+  z-index: 1;
+  color: #f7f7f7;
+  background: #3c9bcd;
+  text-transform: lowercase;
+  font-weight: bold;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+footer {
+	text-align: center;
+	padding: 10px; 
+}
+
+footer a {
+	text-decoration: none;
+}

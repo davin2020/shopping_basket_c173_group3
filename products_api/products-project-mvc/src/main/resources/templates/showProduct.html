@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Products | Show single Product</title>
+<!--   <link rel="stylesheet" href="style_flatcart.css"> -->
+<script type="text/javascript" src="cart_shake.js"></script>
+<link rel="stylesheet" href="simplestyle.css">
+
+<script type="text/javascript" src="cart_shake.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<div>
+	<h1 class="xyz-company-name">XYZ Retail System</h1>
+	<img class='shopping-cart' id="cart-icon" src='https://d30y9cdsu7xlg0.cloudfront.net/png/28468-200.png' onclick=''>
+</div>
+
+<h2 class="xyz-page-name">Product Details</h2>
+
+<div class="table-container">
+<table style="margin: 0 auto;">
+	<tr class=" thprod">
+		<th>Name</th>
+		<th>Description</th>
+		<th>Stock Availability</th>
+		<th>Price</th>
+		<th>Type</th>
+		<th>Tax %</th>
+		<th></th>
+	</tr>
+	<tr>
+		<td th:text="${product.prodName}"></td>
+		<td th:text="${product.description}"></td>
+		<td th:text="${product.quantityAvailable}"></td>
+		<td th:text="${product.price}"></td>		
+		<td th:text="${productDetails.getType().typeName}"></td>
+		<td th:text="${productDetails.getType().taxPercentage}"></td>
+		<td ><a href="#" class="btn-add" onclick='addToCartShake()'>Add</a></td>
+	</tr>
+</table>
+</div>
+<br><br>
+
+
+<footer>
+	<h4 class="xyz-footer-text">
+	<a href="./menu">Home</a> | 
+	<a href="./listAllProducts">All Products</a> |
+	<a href="./xxx">My Account</a>
+	</h4>
+</footer>
+
+</body>
+</html>
