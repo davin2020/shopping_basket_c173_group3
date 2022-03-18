@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Products | Show single Product</title>
+</head>
+
+<body>
+<h1>Single Product Details</h1>
+
+<table border="1">
+	<tr>
+		<th>Product ID</th>
+		<th>Product Name</th>
+		<th>Product Price</th>
+		<th>Stock Availability</th>
+		<th>Description</th>
+		<th>Type Id</th>
+		<th>Type Name</th>
+		<th>Sales Tax Percentage</th>
+	</tr>
+	<tr>
+		<td th:text="${product.prodId}"></td>
+		<td th:text="${product.prodName}"></td>
+		<td th:text="${product.price}"></td>
+		<td th:text="${product.quantityAvailable}"></td>
+		<!--  this should fetch/return an obj rather than an id, will it error if no productDetails? -->
+		<td th:text="${product.description}"></td>
+		<td th:text="${product.typeId}"></td>
+		<td th:text="${productDetails.getType().typeName}"></td>
+		<td th:text="${productDetails.getType().taxPercentage}"></td>
+	</tr>
+</table>
+<br><br>
+<a href="./">Go To Main Page</a>
+
+</body>
+</html>

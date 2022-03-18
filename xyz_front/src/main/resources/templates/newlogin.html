@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add CSS and JS to Thymeleaf</title>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../static/login.css" th:href="@{newlogin.css}" />
+
+</head>
+<body>
+<div class="form-wrapper" id="wrapper-login">
+    <img src='https://i.imgur.com/iqskGqe.jpg' alt='bg1' />
+    <div class="content-wrapper" id="content-signin">
+        <h1>Hello!</h1>
+        <form class="form-login" th:action="@{/login}" method="post" >
+            <input type="email" name="email" placeholder="Username" class="input-username" />
+            <input type="password" name="password" placeholder="Password" class="input-password" />
+            <button type="submit" value="Login" class="btn-login">LOGIN</button>
+        </form>
+        <p>No account? <a href="#wrapper-signup">Sign up</a></p>
+    </div>
+</div>
+<div class="form-wrapper" id="wrapper-signup">
+    <img src='https://i.imgur.com/iqskGqe.jpg ' alt='bg2' />
+    <div class="content-wrapper" id="content-signin">
+        <h1>Join us!</h1>
+        <form th:action="@{/process_register}" th:object="${customer}" class="form-login"   method="post">
+            <input type="text" name="id" placeholder="Id" class="input-email form-control" th:field="*{customerId}"  required />
+            <input type="text" name="username" placeholder="Full Name" th:field="*{customerName}" class="input-username form-control"  />
+            <input type="email" name="email" placeholder="Email address" class="input-email form-control" th:field="*{customerEmail}" />
+            <input type="password" name="password" placeholder="Password" class="input-password form-control" th:field="*{password}"   />
+
+                <input type="checkbox" name="remember-me" />&nbsp;Remember Me
+
+            <button type="submit" class="btn-login">SIGN UP</button>
+        </form>
+        <p>Got account? <a href="#wrapper-login">Sign in</a></p>
+    </div>
+</div>
+</body>
+</html>
