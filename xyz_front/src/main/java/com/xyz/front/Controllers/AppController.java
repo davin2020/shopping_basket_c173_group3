@@ -3,6 +3,7 @@ package com.xyz.front.Controllers;
 
 import com.xyz.front.Entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,12 +16,27 @@ import org.springframework.web.client.RestTemplate;
 
 @Controller
 public class AppController {
+	//private static final String BACKEND_URL_PORT = "http://localhost:8083";
+	
   //  @Autowired
  //   CustomerDao customerDao;
 
+//	 @Value("${app.title}")
+//	 private String appTitle;
+	 
     @Autowired
     private RestTemplate restTemplate;
 
+//    @GetMapping("/mytitle")
+//    public String getValue(){
+//    	System.out.println("__ Applicatoin /mytitle = " + appTitle);
+//        return "index";
+//    }
+    
+	//get the value of the relevant backend api from the app.properties file - test this
+	@Value("${app.backend.urlport}") 
+	private String BACKEND_URL_PORT;
+    
     @GetMapping("")
     public String viewHomePage(){
         return "index";
@@ -63,13 +79,15 @@ public class AppController {
 
         return "redirect:/";
     }
+    
+    //after registering should  this auto-login the user?
     @PostMapping("/process_register")
     public String processRegister(Customer user) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
 
-        Customer customer= restTemplate.postForObject("http://localhost:8082/savecustomer/",user ,Customer.class);
+        Customer customer= restTemplate.postForObject(BACKEND_URL_PORT + "/savecustomer/", user, Customer.class);
 //
        // customerDao.save(user);
 

@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import com.xyz.front.Entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -15,23 +16,49 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-
+//	@Value("${server.port}") 
+//	private  String localPort;
+	//these cannot be static else t  hey wont work!
+	
+//	@Value("${app.title}")
+//	private String appTitle;
+	
+//	spring.server.localurl
+//	@Value("${spring.server.localurl}") 
+//	private   String localUrl;
+	
+	//this is null despite  indiv values not being null
+	//private  String BACKEND_URL_PORT = localUrl + ":" + localPort;
+//	private static final String BACKEND_URL_PORT = "http://localhost:8083";
+	
+	//get the value of the relevant backend api from the app.properties file
+	@Value("${app.backend.urlport}") 
+	private String BACKEND_URL_PORT;
+	
+	
 	@Autowired
 	private RestTemplate restTemplate;
 
 	@Override
 	public Product getProductById(int id) {
-		return restTemplate.getForObject("http://localhost:8082/products/" + id, Product.class);
+		
+		return restTemplate.getForObject(BACKEND_URL_PORT + "/products/" + id, Product.class);
 	}
 
 	@Override
 	public List<Product> getAllProducts() {
-		return restTemplate.getForObject("http://localhost:8082/products", ProductList.class).getProdList();
+		//THIS WORKS OK
+//		System.out.println("__ Applicatoin TITLE = " + appTitle);
+//		System.out.println("__ getAllProducts " +  localUrl);
+//		System.out.println("__ Applicatoin PORT = " + localPort);
+		//System.out.println("__ BACKEND_URL_PORT  = " + BACKEND_URL_PORT);
+		System.out.println("__ BACKEND_URL_PORT  = " + BACKEND_URL_PORT);
+		return restTemplate.getForObject(BACKEND_URL_PORT + "/products", ProductList.class).getProdList();
 	}
 
 	@Override
 	public boolean saveProduct(Product product) {
-		Product prod = restTemplate.postForObject("http://localhost:8082/products", product, Product.class);
+		Product prod = restTemplate.postForObject(BACKEND_URL_PORT + "/products", product, Product.class);
 		if (prod != null)
 			return true;
 		return false;
@@ -42,7 +69,7 @@ public class ProductServiceImpl implements ProductService {
 		HttpHeaders header = new HttpHeaders();
 		HttpEntity<Product> entity = new HttpEntity<Product>(header);
 		Product product = restTemplate
-				.exchange("http://localhost:8082/products/" + id, HttpMethod.DELETE, entity, Product.class)
+				.exchange(BACKEND_URL_PORT + "/products/" + id, HttpMethod.DELETE, entity, Product.class)
 				.getBody();
 		if (product != null)
 			return true;
@@ -51,9 +78,9 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public ProductDetails getProductDetailsById(int id) {
-		Product prod = restTemplate.getForObject("http://localhost:8082/products/" + id, Product.class);
+		Product prod = restTemplate.getForObject(BACKEND_URL_PORT + "/products/" + id, Product.class);
 		int typeId = prod.getTypeId();
-		Type type = restTemplate.getForObject("http://localhost:8082/types/" + typeId, Type.class);
+		Type type = restTemplate.getForObject(BACKEND_URL_PORT + "/types/" + typeId, Type.class);
 		ProductDetails prodDetails = new ProductDetails(prod, type);
 		// how to add type info to product? eg in new object ProductDetails or ?
 		return prodDetails;
@@ -63,13 +90,13 @@ public class ProductServiceImpl implements ProductService {
 	// or ProductDetails?
 	@Override
 	public ProductList getProductDetailsByTypeId(int typeId) {
-		ProductList prodList = restTemplate.getForObject("http://localhost:8082/products/type/" + typeId, ProductList.class);
+		ProductList prodList = restTemplate.getForObject(BACKEND_URL_PORT + "/products/type/" + typeId, ProductList.class);
 		return prodList;
 	}
 
 	@Override
 	public List<Type> getAllTypes() {
-		return restTemplate.getForObject("http://localhost:8082/types", TypeList.class).getTypeList();
+		return restTemplate.getForObject(BACKEND_URL_PORT + "/types", TypeList.class).getTypeList();
 	}
 
 }
