@@ -22,5 +22,6 @@ public class Order {
 	private int orderId;
 	private String customerId;
 	private float totalAmount;
+	// TODO orderDate should be a Date not an int - else need to convert from epoch time
 	private int orderDate;
 }

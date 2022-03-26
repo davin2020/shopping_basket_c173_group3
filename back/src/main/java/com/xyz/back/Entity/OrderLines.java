@@ -11,5 +11,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class OrderLines {
 	
+	//this will be the name of the JSON array returned by API calls
 	List<OrderLine> productList;
 }
